@@ -8,9 +8,9 @@ body {
 
 .logo{
     position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 50px;  /* Ajusta el tamaño según sea necesario */
+    top: 15px;
+    right: 15px;
+    width: 80px;  /* Ajusta el tamaño según sea necesario */
     height: auto; /* Ajusta el tamaño según sea necesario */
     z-index: 1001; /* Asegura que el logo esté por encima de otros elementos */
 }
@@ -78,6 +78,13 @@ body {
     vertical-align: middle; /* Alinea verticalmente con el texto */
 }
 
+.section-logo {
+    width: 40px; /* Ajusta el tamaño según sea necesario */
+    height: auto; /* Mantiene la proporción */
+    vertical-align: middle; /* Alinea verticalmente con el texto */
+    margin-right: 5px; /* Espacio entre la imagen y el texto */
+}
+
 
 /* Contenido principal */
 .main-content {
@@ -113,7 +120,7 @@ body {
     width: 40px; /* Ajusta el tamaño según sea necesario */
     height: auto; /* Mantiene la proporción */
     vertical-align: middle; /* Alinea verticalmente con el texto */
-    margin-right: 10px; /* Espacio entre la imagen y el texto */
+    margin-right: 0px; /* Espacio entre la imagen y el texto */
 }
 
 .card-header {
