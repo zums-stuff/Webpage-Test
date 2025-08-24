@@ -2,13 +2,18 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Kampilation Error - Prefix Zum</title>
+    <title>Zum's Awesome Page</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Menú lateral -->
-    <div class="sidebar">
-        <h2>Menú</h2>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+    <img src="assets/CPCFI.png" alt = "CPCFI Logo" class="logo">
+
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
         <a href="index.html">Inicio</a>
         <a href="pages/clases.html">Clases</a>
         <a href="pages/ejercicios.html">Ejercicios</a>
@@ -16,8 +21,7 @@
         <a href="pages/contacto.html">Contacto</a>
     </div>
 
-    <!-- Contenido -->
-    <div class="main-content">
+    <div class="main-content" id="main">
         <h1>Kampilation Error por Prefix Zum</h1>
         <p>Bienvenido a mi página de apuntes y recursos sobre programación competitiva.</p>
 
@@ -31,5 +35,30 @@
             <p>Lorem Ipsum La Vaca Saturno Saturnita 🚀</p>
         </div>
     </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+            document.getElementById("main").classList.toggle("active");
+        }
+    </script>
+
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const main = document.getElementById("main");
+
+        // Restaurar estado al cargar la página
+        if (localStorage.getItem("sidebarOpen") === "true") {
+            sidebar.classList.add("active");
+            main.classList.add("active");
+        }
+
+        function toggleSidebar() {
+            sidebar.classList.toggle("active");
+            main.classList.toggle("active");
+            // Guardar estado
+            localStorage.setItem("sidebarOpen", sidebar.classList.contains("active"));
+        }
+    </script>
 </body>
 </html>
