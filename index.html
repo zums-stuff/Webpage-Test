@@ -1,25 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Your Webpage Title</title>
+    <title>Kampilation Error - Prefix Zum</title>
     <style>
         body {
-            background-color: #333;
-            color: #fff;
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #eee;
+            display: flex;
         }
-        .container {
+
+        /* Barra lateral */
+        .sidebar {
+            width: 250px;
+            background-color: #2a2a40;
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            color: #ffcc00;
+            text-align: center;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin: 12px 0;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444466;
+            color: #fff;
+        }
+
+        /* Contenido principal */
+        .main-content {
+            margin-left: 250px;
             padding: 40px;
+            flex: 1;
+        }
+
+        h1 {
+            color: #ffcc00;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        /* Tarjetas de contenido */
+        .card {
+            background: #2e2e48;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Menú lateral -->
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <a href="#">Inicio</a>
+        <a href="#">Clases</a>
+        <a href="#">Ejercicios</a>
+        <a href="#">Recursos</a>
+        <a href="#">Contacto</a>
+    </div>
+
+    <!-- Contenido -->
+    <div class="main-content">
         <h1>Kampilation Error por Prefix Zum</h1>
-        <p>Lorem Ipsum La Vaca Saturno Saturnita</p>
+        <p>Bienvenido a mi página de apuntes y recursos sobre programación competitiva.</p>
+
+        <div class="card">
+            <h2>📘 Introducción</h2>
+            <p>Aquí encontrarás material de apoyo para mejorar en programación competitiva, con ejemplos, problemas y explicaciones paso a paso.</p>
+        </div>
+
+        <div class="card">
+            <h2>⚡ Última actualización</h2>
+            <p>Lorem Ipsum La Vaca Saturno Saturnita 🚀</p>
+        </div>
     </div>
 </body>
 </html>
