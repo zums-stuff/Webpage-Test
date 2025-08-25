@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="../../assets/CPCFI.png">
+    <meta charset="UTF-8">
+    <title>Hashing (USet, UMap) - Zum's CPCFI Page</title>
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+    <img src="http://www.cpcfi.unam.mx:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fglobos.024a1c7f.png&w=1080&q=75" alt = "CPCFI Logo" class="logo">
+
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+
+        <div class="card-header">
+                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
+                <a href="../../index.html">Inicio</a>
+        </div>
+        
+        <div class="card-header">
+                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
+                <a href="../../pages/clases.html">Clases</a>
+        </div>
+        
+        <div class="card-header">
+                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
+                <a href="../../pages/recursos.html">Recursos</a>
+        </div>
+
+        <div class="card-header">
+                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
+                <a href="../../pages/contacto.html">Contacto</a>
+        </div>
+    </div>
+
+    <div class="main-content" id="main">
+        <div class="card-header">
+                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="section-logo">
+                <h1>Hashing (USet, UMap)</h1>
+        </div>
+        
+        <p style="font-size: 30px;">Aquí van los apuntes de cada sesión de programación competitiva.</p>
+
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+            document.getElementById("main").classList.toggle("active");
+        }
+    </script>
+
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const main = document.getElementById("main");
+
+        // Restaurar estado al cargar la página
+        if (localStorage.getItem("sidebarOpen") === "true") {
+            sidebar.classList.add("active");
+            main.classList.add("active");
+        }
+
+        function toggleSidebar() {
+            sidebar.classList.toggle("active");
+            main.classList.toggle("active");
+            // Guardar estado
+            localStorage.setItem("sidebarOpen", sidebar.classList.contains("active"));
+        }
+    </script>
+</body>
+</html>

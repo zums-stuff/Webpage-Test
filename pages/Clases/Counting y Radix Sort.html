@@ -1,64 +1,271 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" type="image/png" href="../../assets/CPCFI.png">
     <meta charset="UTF-8">
     <title>Counting y Radix Sort - Zum's CPCFI Page</title>
+    <link rel="icon" type="image/png" href="../../assets/CPCFI.png">
     <link rel="stylesheet" href="../../css/style.css">
+
+    <!-- Prism.js CSS para estilos tipo VSCode -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+
+    <!-- Script para copiar código -->
+    <script>
+    function copyCode(button) {
+        
+        const codeBlock = button.nextElementSibling.querySelector('code');
+        navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+            button.innerText = "Copiado!";
+            setTimeout(() => button.innerText = "Copiar código", 2000);
+        });
+    }
+    </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-
-    <img src="http://www.cpcfi.unam.mx:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fglobos.024a1c7f.png&w=1080&q=75" alt = "CPCFI Logo" class="logo">
+    <img src="http://www.cpcfi.unam.mx:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fglobos.024a1c7f.png&w=1080&q=75" alt="CPCFI Logo" class="logo">
 
     <div class="sidebar" id="sidebar">
         <h2>Menu</h2>
-
         <div class="card-header">
-                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
-                <a href="../../index.html">Inicio</a>
+            <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
+            <a href="../../index.html">Inicio</a>
         </div>
-        
         <div class="card-header">
-                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
-                <a href="../../pages/clases.html">Clases</a>
+            <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
+            <a href="../../pages/clases.html">Clases</a>
         </div>
-        
         <div class="card-header">
-                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
-                <a href="../../pages/recursos.html">Recursos</a>
+            <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
+            <a href="../../pages/recursos.html">Recursos</a>
         </div>
-
         <div class="card-header">
-                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
-                <a href="../../pages/contacto.html">Contacto</a>
+            <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="sidebar-logo">
+            <a href="../../pages/contacto.html">Contacto</a>
         </div>
     </div>
 
     <div class="main-content" id="main">
         <div class="card-header">
-                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" class="section-logo">
-                <h1>Counting y Radix Sort</h1>
+            <img src="../../assets/CPCFI.png" alt="CPCFI Logo" width = 40px class ="section-logo">
+            <h1>Counting y Radix Sort</h1>
         </div>
-        
-        <p style="font-size: 30px;">Aquí van los apuntes de cada sesión de programación competitiva.</p>
 
+        <div class="unlinked-card">
+            <h2>¿Qué son Counting Sort y Radix Sort?</h2>
+            <p>Son algoritmos de ordenamiento <strong>no basados en comparación</strong>, lo que les permite superar el límite inferior de <code class="language-none">O(n log n)</code> de los algoritmos tradicionales como Merge Sort o Quick Sort.</p>
+        </div>
+
+        <div class="unlinked-card">
+            <div class="card-header">
+                <img src="../../assets/Counting Sort.png" alt="Counting Sort Logo" style = filter:invert(1) width = 30px class="section-logo">
+                <h2>Counting Sort</h2>
+            </div>
+            <p>Counting Sort es un algoritmo <strong>estable</strong> que ordena elementos en <code class="language-none">O(n + k)</code>, donde <code class="language-none">k</code> es el rango de los valores. No compara elementos, sino que cuenta cuántas veces aparece cada valor y reconstruye el arreglo ordenado.</p>
+            <ul>
+                <li>Ideal cuando los valores están en un rango pequeño.</li>
+                <li>Requiere conocer el valor mínimo y máximo.</li>
+                <li>Complejidad temporal y espacial: <code class="language-none">O(n + k)</code>.</li>
+            </ul>
+            <h3>Ejemplo:</h3>
+            <pre><code class="language-none">[4, 2, 2, 8, 3, 3, 1]</code></pre>
+            <p>Frecuencias:</p>
+            <pre><code class="language-none">
+1 → 1  
+2 → 2  
+3 → 2  
+4 → 1  
+8 → 1
+</code></pre><p>Resultado ordenado:</p>
+            <pre><code class="language-none">[4, 2, 2, 8, 3, 3, 1]</code></pre>
+
+            <h3>Implementación en C++:</h3>
+            <div>
+                <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
+                <pre><code class="language-clike">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+void countingSort(vector&lt;int&gt;&amp; arr) {
+    int maxVal = *max_element(arr.begin(), arr.end());
+    int minVal = *min_element(arr.begin(), arr.end());
+    int range = maxVal - minVal + 1;
+
+    vector&lt;int&gt; count(range, 0);
+    vector&lt;int&gt; output(arr.size());
+
+    for (int num : arr)
+        count[num - minVal]++;
+
+    for (int i = 1; i &lt; range; i++)
+        count[i] += count[i - 1];
+
+    for (int i = arr.size() - 1; i &gt;= 0; i--) {
+        output[count[arr[i] - minVal] - 1] = arr[i];
+        count[arr[i] - minVal]--;
+    }
+
+    arr = output;
+}
+
+int main() {
+    vector&lt;int&gt; arr = {4, 2, 2, 8, 3, 3, 1};
+    countingSort(arr);
+    for (int num : arr)
+        cout &lt;&lt; num &lt;&lt; " ";
+    return 0;
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="unlinked-card">
+    <h2>Características avanzadas de Counting Sort</h2>
+    <h3>‣ Estabilidad</h3>
+    <p>Counting Sort puede ser <strong>estable</strong> si se implementa correctamente, lo que significa que conserva el orden relativo de elementos con el mismo valor.</p>
+    <h3>‣ Limitaciones</h3>
+    <ul>
+        <li>No funciona bien con <strong>valores negativos</strong> a menos que se adapte.</li>
+        <li>No es adecuado para <strong>datos con decimales</strong> o estructuras complejas.</li>
+        <li>Su eficiencia depende del rango de los datos.</li>
+    </ul>
+    <h3>‣ Adaptaciones</h3>
+    <ul>
+        <li>Se puede modificar para ordenar <strong>objetos</strong> si se cuenta por claves.</li>
+        <li>Puede adaptarse para trabajar con <strong>valores negativos</strong> usando un desplazamiento.</li>
+    </ul>
+</div>
+
+        <div class="unlinked-card">
+            <h2>🔢 Radix Sort</h2>
+            <p>Radix Sort ordena números <strong>dígito por dígito</strong>, del menos significativo al más significativo, usando Counting Sort como subrutina.</p>
+            <ul>
+                <li>Complejidad temporal: <code class="language-none">O(d(n + k))</code>, donde <code class="language-none">d</code> es el número de dígitos.</li>
+                <li>Ideal para enteros grandes o cadenas (ASCII).</li>
+            </ul>
+            <h3>Ejemplo:</h3>
+<pre><code class="language-none">[170, 45, 75, 90, 802, 24, 2, 66]</code></pre>
+<p>Orden por unidades:</p>
+<pre><code class="language-none">[170, 90, 802, 2, 24, 45, 75, 66]</code></pre>
+<p>Orden por decenas:</p>
+<pre><code class="language-none">[802, 2, 24, 45, 66, 170, 75, 90]</code></pre>
+<p>Orden por centenas:</p>
+<pre><code class="language-none">[2, 24, 45, 66, 75, 90, 170, 802]</code></pre>
+            <h3>Implementación en C++:</h3>
+            <div>
+                <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
+                <pre><code class="language-clike">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+void countingSortByDigit(vector&lt;int&gt;&amp; arr, int exp) {
+    vector&lt;int&gt; output(arr.size());
+    int count[10] = {0};
+
+    for (int num : arr)
+        count[(num / exp) % 10]++;
+
+    for (int i = 1; i &lt; 10; i++)
+        count[i] += count[i - 1];
+
+    for (int i = arr.size() - 1; i &gt;= 0; i--) {
+        int digit = (arr[i] / exp) % 10;
+        output[count[digit] - 1] = arr[i];
+        count[digit]--;
+    }
+
+    arr = output;
+}
+
+void radixSort(vector&lt;int&gt;&amp; arr) {
+    int maxVal = *max_element(arr.begin(), arr.end());
+    for (int exp = 1; maxVal / exp &gt; 0; exp *= 10)
+        countingSortByDigit(arr, exp);
+}
+
+int main() {
+    vector&lt;int&gt; arr = {170, 45, 75, 90, 802, 24, 2, 66};
+    radixSort(arr);
+    for (int num : arr)
+        cout &lt;&lt; num &lt;&lt; " ";
+    return 0;
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="unlinked-card">
+    <h2>Características avanzadas de Radix Sort</h2>
+    <h3>‣ Base de ordenamiento</h3>
+    <ul>
+        <li>Base 10 (decimal)</li>
+        <li>Base 2 (binaria)</li>
+        <li>Base 256 (ASCII para cadenas)</li>
+    </ul>
+    <h3>‣ Estabilidad requerida</h3>
+    <p>Radix Sort <strong>depende de un algoritmo estable</strong> como Counting Sort para cada pasada.</p>
+    <h3>‣ Aplicaciones</h3>
+    <ul>
+        <li>Ordenamiento de <strong>números enteros grandes</strong></li>
+        <li>Ordenamiento de <strong>cadenas</strong> (por caracteres)</li>
+        <li>Ordenamiento de <strong>fechas</strong> o <strong>identificadores estructurados</strong></li>
+    </ul>
+
+
+
+    
+</div>
+
+    <div class="unlinked-card">
+    <h2>💡 Detalles técnicos en C++</h2>
+
+    <h3>• Uso de <code class="language-clike">std::vector</code></h3>
+    <p>Ambos algoritmos utilizan <code class = "language-clike">std::vector</code> para manejar arreglos dinámicos como el arreglo de conteo y el arreglo de salida. Esto permite trabajar con tamaños variables sin ocuparse por la gestión manual de memoria.</p>
+
+    <h3>• Iteración inversa en Counting Sort</h3>
+    <p>Para mantener la <strong>estabilidad</strong>, Counting Sort recorre el arreglo original de <strong>atrás hacia adelante</strong> al construir el arreglo ordenado. Esto asegura que los elementos con el mismo valor mantengan su orden relativo.</p>
+
+    <h3>• División y módulo en Radix Sort</h3>
+    <p>Radix Sort utiliza operaciones como <code class="language-none">(num / exp) % base</code> para extraer dígitos específicos. Estas operaciones son clave para ordenar por cada posición decimal (unidades, decenas, centenas, etc.).</p>
+
+    <h3>• Uso de <code class="language-none">std::max_element</code></h3>
+    <p>Se usa para encontrar el valor máximo del arreglo, lo cual es necesario para determinar el número de dígitos en Radix Sort y el rango en Counting Sort.</p>
     </div>
 
-    <script>
-        function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("active");
-            document.getElementById("main").classList.toggle("active");
-        }
-    </script>
+    
+    <div class="unlinked-card">
+            <h2>Comparación</h2>
+            <ul>
+                <li><strong>Counting Sort</strong>: eficiente para rangos pequeños y datos discretos.</li>
+                <li><strong>Radix Sort</strong>: eficiente para números con pocos dígitos o cadenas.</li>
+            </ul>
+        </div>
+    
+        <div class = "unlinked-card"><div class="card-header">
+                <img src="../../assets/CPCFI.png" alt="CPCFI Logo" width = 30px class="section-logo">
+                <h1>Ejercicios:</h1>
+            </div>
+            <div class="card-header">
+                    <img src="../../assets/codeforces.png" alt="Codeforces Logo" width = 20px class="section-logo">
+                    <a href="https://codeforces.com/problemset/problem/1980/B" style="color: aliceblue;">1980 - B. Choosing Cubes</a>
+            </div>
+            
+        </div>
+    </div>
+    
+
 
     <script>
         const sidebar = document.getElementById("sidebar");
         const main = document.getElementById("main");
 
-        // Restaurar estado al cargar la página
         if (localStorage.getItem("sidebarOpen") === "true") {
             sidebar.classList.add("active");
             main.classList.add("active");
@@ -67,9 +274,17 @@
         function toggleSidebar() {
             sidebar.classList.toggle("active");
             main.classList.toggle("active");
-            // Guardar estado
             localStorage.setItem("sidebarOpen", sidebar.classList.contains("active"));
         }
+    </script>
+
+    <!-- Mueve los scripts de Prism aquí, al final del body -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-clike.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
+    <script>
+      Prism.highlightAll();
     </script>
 </body>
 </html>
